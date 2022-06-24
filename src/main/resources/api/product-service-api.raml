@@ -1,0 +1,107 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/d9b78d30-effd-46f3-9fd8-3491cc29de84 # 
+
+title: product-service-api
+version: 1.0.0
+types:
+  product: !include productdatatype/productdataType.raml
+
+/products:
+  get:
+    description: this api needs retrive the product details
+    responses:
+      200:
+        body:
+          application/json:
+            type: product[]
+            example: !include productexamples/productexample.raml
+
+              
+  /{productId}:
+    get:
+      description: this api is for single product
+      responses:
+        200:
+          body:
+            application/json:
+              type: product
+              example: !include productexamples/singleexample.raml
+                
+          
+
+/create:
+  post:
+    description: this api is ccreate 
+    body:
+      application/json:
+        type: product[]
+        example: !include productexamples/productexample.raml
+         
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: product created sucesfully    
+/update:
+  put:
+    description: api is use for update
+    body:
+      application/json:
+        type: product[]
+        example: !include productexamples/productexample.raml
+         
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: updated succes
+
+/deleteproduct:
+  description: delete the product
+  delete:
+    queryParameters:
+      productId:
+        type: integer
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+               message: product deleted sucesfully 
+           
+                    
+      
+
+
+
+/addproducts:
+  post:
+    description: add the products
+    body:
+      application/json:
+        example:
+          [{
+               "productName":"loptop",
+               "productId":"1",
+               "price": 200
+               
+              }]
+    responses:
+      500:
+        description: error occured
+        body:
+          application/json:
+            example:
+              
+                                      
+          
+
+          
+
+
+
+
+              
